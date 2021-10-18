@@ -5,6 +5,9 @@ using namespace std;
 const double inf = numeric_limits<int>::max();
 double dist_estimada[15][15];
 double dist_real[15][15];
+//vector <vector<double> > caminhos;
+vector <pair<string, string>> linhas;
+
 
 void init_dist(){
     dist_estimada[1][1] = 0, dist_estimada[1][2] = 10, dist_estimada[1][3] = 18.5, dist_estimada[1][4] = 24.8, dist_estimada[1][5] = 36.4, dist_estimada[1][6] = 38.8, dist_estimada[1][7] = 35.8,
@@ -51,58 +54,76 @@ void init_dist(){
 
     /*########################################################################################################################################################################################################*/
 
-    dist_real[1][1] = inf, dist_real[1][2] = 10, dist_real[1][3] = inf, dist_real[1][4] = inf, dist_real[1][5] = inf, dist_real[1][6] = inf, dist_real[1][7] = inf,
+    dist_real[1][1] = 0, dist_real[1][2] = 10, dist_real[1][3] = inf, dist_real[1][4] = inf, dist_real[1][5] = inf, dist_real[1][6] = inf, dist_real[1][7] = inf,
     dist_real[1][8] = inf, dist_real[1][9] = inf, dist_real[1][10] = inf, dist_real[1][11] = inf, dist_real[1][12] = inf, dist_real[1][13] = inf, dist_real[1][14] = inf;
 
-    dist_real[2][1] = 10, dist_real[2][2] = inf, dist_real[2][3] = 8.5, dist_real[2][4] = inf, dist_real[2][5] = inf, dist_real[2][6] = inf, dist_real[2][7] = inf,
+    dist_real[2][1] = 10, dist_real[2][2] = 0, dist_real[2][3] = 8.5, dist_real[2][4] = inf, dist_real[2][5] = inf, dist_real[2][6] = inf, dist_real[2][7] = inf,
     dist_real[2][8] = inf, dist_real[2][9] = 10, dist_real[2][10] = 3.5, dist_real[2][11] = inf, dist_real[2][12] = inf, dist_real[2][13] = inf, dist_real[2][14] = inf;
 
-    dist_real[3][1] = inf, dist_real[3][2] = 8.5, dist_real[3][3] = inf, dist_real[3][4] = 6.3, dist_real[3][5] = inf, dist_real[3][6] = inf, dist_real[3][7] = inf,
+    dist_real[3][1] = inf, dist_real[3][2] = 8.5, dist_real[3][3] = 0, dist_real[3][4] = 6.3, dist_real[3][5] = inf, dist_real[3][6] = inf, dist_real[3][7] = inf,
     dist_real[3][8] = inf, dist_real[3][9] = 9.4, dist_real[3][10] = inf, dist_real[3][11] = inf, dist_real[3][12] = inf, dist_real[3][13] = 18.7, dist_real[3][14] = inf;
 
-    dist_real[4][1] = inf, dist_real[4][2] = inf, dist_real[4][3] = 6.3, dist_real[4][4] = inf, dist_real[4][5] = 13, dist_real[4][6] = inf, dist_real[4][7] = inf,
+    dist_real[4][1] = inf, dist_real[4][2] = inf, dist_real[4][3] = 6.3, dist_real[4][4] = 0, dist_real[4][5] = 13, dist_real[4][6] = inf, dist_real[4][7] = inf,
     dist_real[4][8] = 15.3, dist_real[4][9] = inf, dist_real[4][10] = inf, dist_real[4][11] = inf, dist_real[4][12] = inf, dist_real[4][13] = 12.8, dist_real[4][14] = inf;
 
-    dist_real[5][1] = inf, dist_real[5][2] = inf, dist_real[5][3] = inf, dist_real[5][4] = 13, dist_real[5][5] = inf, dist_real[5][6] = 3, dist_real[5][7] = 2.4,
+    dist_real[5][1] = inf, dist_real[5][2] = inf, dist_real[5][3] = inf, dist_real[5][4] = 13, dist_real[5][5] = 0, dist_real[5][6] = 3, dist_real[5][7] = 2.4,
     dist_real[5][8] = 30, dist_real[5][9] = inf, dist_real[5][10] = inf, dist_real[5][11] = inf, dist_real[5][12] = inf, dist_real[5][13] = inf, dist_real[5][14] = inf;
 
-    dist_real[6][1] = inf, dist_real[6][2] = inf, dist_real[6][3] = inf, dist_real[6][4] = inf, dist_real[6][5] = 3, dist_real[6][6] = inf, dist_real[6][7] = inf,
+    dist_real[6][1] = inf, dist_real[6][2] = inf, dist_real[6][3] = inf, dist_real[6][4] = inf, dist_real[6][5] = 3, dist_real[6][6] = 0, dist_real[6][7] = inf,
     dist_real[6][8] = inf, dist_real[6][9] = inf, dist_real[6][10] = inf, dist_real[6][11] = inf, dist_real[6][12] = inf, dist_real[6][13] = inf, dist_real[6][14] = inf;
 
-    dist_real[7][1] = inf, dist_real[7][2] = inf, dist_real[7][3] = inf, dist_real[7][4] = inf, dist_real[7][5] = 2.4, dist_real[7][6] = inf, dist_real[7][7] = inf,
+    dist_real[7][1] = inf, dist_real[7][2] = inf, dist_real[7][3] = inf, dist_real[7][4] = inf, dist_real[7][5] = 2.4, dist_real[7][6] = inf, dist_real[7][7] = 0,
     dist_real[7][8] = inf, dist_real[7][9] = inf, dist_real[7][10] = inf, dist_real[7][11] = inf, dist_real[7][12] = inf, dist_real[7][13] = inf, dist_real[7][14] = inf;
 
     dist_real[8][1] = inf, dist_real[8][2] = inf, dist_real[8][3] = inf, dist_real[8][4] = 15.3, dist_real[8][5] = 30, dist_real[8][6] = inf, dist_real[8][7] = inf,
-    dist_real[8][8] = inf, dist_real[8][9] = 9.6, dist_real[8][10] = inf, dist_real[8][11] = inf, dist_real[8][12] = 6.4, dist_real[8][13] = inf, dist_real[8][14] = inf;
+    dist_real[8][8] = 0, dist_real[8][9] = 9.6, dist_real[8][10] = inf, dist_real[8][11] = inf, dist_real[8][12] = 6.4, dist_real[8][13] = inf, dist_real[8][14] = inf;
 
     dist_real[9][1] = inf, dist_real[9][2] = 10, dist_real[9][3] = 9.4, dist_real[9][4] = inf, dist_real[9][5] = inf, dist_real[9][6] = inf, dist_real[9][7] = inf,
-    dist_real[9][8] = 9.6, dist_real[9][9] = inf, dist_real[9][10] = inf, dist_real[9][11] = 11.2, dist_real[9][12] = inf, dist_real[9][13] = inf, dist_real[9][14] = inf;
+    dist_real[9][8] = 9.6, dist_real[9][9] = 0, dist_real[9][10] = inf, dist_real[9][11] = 12.2, dist_real[9][12] = inf, dist_real[9][13] = inf, dist_real[9][14] = inf;
 
     dist_real[10][1] = inf, dist_real[10][2] = 3.5, dist_real[10][3] = inf, dist_real[10][4] = inf, dist_real[10][5] = inf, dist_real[10][6] = inf, dist_real[10][7] = inf,
-    dist_real[10][8] = inf, dist_real[10][9] = inf, dist_real[10][10] = inf, dist_real[10][11] = inf, dist_real[10][12] = inf, dist_real[10][13] = inf, dist_real[10][14] = inf;
+    dist_real[10][8] = inf, dist_real[10][9] = inf, dist_real[10][10] = 0, dist_real[10][11] = inf, dist_real[10][12] = inf, dist_real[10][13] = inf, dist_real[10][14] = inf;
 
     dist_real[11][1] = inf, dist_real[11][2] = inf, dist_real[11][3] = inf, dist_real[11][4] = inf, dist_real[11][5] = inf, dist_real[11][6] = inf, dist_real[11][7] = inf,
-    dist_real[11][8] = inf, dist_real[11][9] = 11.2, dist_real[11][10] = inf, dist_real[11][11] = inf, dist_real[11][12] = inf, dist_real[11][13] = inf, dist_real[11][14] = inf;
+    dist_real[11][8] = inf, dist_real[11][9] = 12.2, dist_real[11][10] = inf, dist_real[11][11] = 0, dist_real[11][12] = inf, dist_real[11][13] = inf, dist_real[11][14] = inf;
 
     dist_real[12][1] = inf, dist_real[12][2] = inf, dist_real[12][3] = inf, dist_real[12][4] = inf, dist_real[12][5] = inf, dist_real[12][6] = inf, dist_real[12][7] = inf,
-    dist_real[12][8] = 6.4, dist_real[12][9] = inf, dist_real[12][10] = inf, dist_real[12][11] = inf, dist_real[12][12] = inf, dist_real[12][13] = inf, dist_real[12][14] = inf;
+    dist_real[12][8] = 6.4, dist_real[12][9] = inf, dist_real[12][10] = inf, dist_real[12][11] = inf, dist_real[12][12] = 0, dist_real[12][13] = inf, dist_real[12][14] = inf;
 
     dist_real[13][1] = inf, dist_real[13][2] = inf, dist_real[13][3] = 18.7, dist_real[13][4] = 12.8, dist_real[13][5] = inf, dist_real[13][6] = inf, dist_real[13][7] = inf,
-    dist_real[13][8] = inf, dist_real[13][9] = inf, dist_real[13][10] = inf, dist_real[13][11] = inf, dist_real[13][12] = inf, dist_real[13][13] = inf, dist_real[13][14] = 5.1;
+    dist_real[13][8] = inf, dist_real[13][9] = inf, dist_real[13][10] = inf, dist_real[13][11] = inf, dist_real[13][12] = inf, dist_real[13][13] = 0, dist_real[13][14] = 5.1;
 
     dist_real[14][1] = inf, dist_real[14][2] = inf, dist_real[14][3] = inf, dist_real[14][4] = inf, dist_real[14][5] = inf, dist_real[14][6] = inf, dist_real[14][7] = inf,
-    dist_real[14][8] = inf, dist_real[14][9] = inf, dist_real[14][10] = inf, dist_real[14][11] = inf, dist_real[14][12] = inf, dist_real[14][13] = 5.1, dist_real[14][14] = inf;
+    dist_real[14][8] = inf, dist_real[14][9] = inf, dist_real[14][10] = inf, dist_real[14][11] = inf, dist_real[14][12] = inf, dist_real[14][13] = 5.1, dist_real[14][14] = 0;
 
+}
+
+void init_linhas(){
+    linhas.resize(15);
+    linhas[1] = make_pair("azul","none");
+    linhas[2] = make_pair("azul","amarela");
+    linhas[3] = make_pair("azul","vermelha");
+    linhas[4] = make_pair("azul","verde");
+    linhas[5] = make_pair("azul","amarela");
+    linhas[6] = make_pair("azul","none");
+    linhas[7] = make_pair("amarela","none");
+    linhas[8] = make_pair("amarela","verde");
+    linhas[9] = make_pair("amarela","vermelha");
+    linhas[10] = make_pair("amarela","none");
+    linhas[11] = make_pair("vermelha","none");
+    linhas[12] = make_pair("verde","none");
+    linhas[13] = make_pair("verde","vermelha");
+    linhas[14] = make_pair("verde","none");
+}
+
+vector <vector<double>> init_caminhos(vector <vector<double> > caminhos){
+    for(auto & caminho : caminhos){ caminho.emplace_back(inf); }
+    return caminhos;
 }
 
 double calc_time(double distancia){
     if(distancia < inf) return distancia*2;
     else return inf;
-}
-
-double heuristica(double dist_estimada, double dist_real){
-    return dist_estimada + dist_real /* + baldeaçao*/ ;
-    //tratar baldeaçao
 }
 
 void convertToTime(){
@@ -114,49 +135,122 @@ void convertToTime(){
     }
 }
 
+double heuristica(double estimada, double real, double tempo_baldeacao){
+    return estimada + real + tempo_baldeacao;
+}
+
+double baldeacao(string linha_atual, int i) {
+    if( (linha_atual == linhas[i].first) || linha_atual == linhas[i].second) return 0;
+    else return 4;
+}
+
+
+string trocaLinha(int anterior, int atual){
+    if(linhas[anterior].first == linhas[atual].first || linhas[anterior].second == linhas[atual].first) return linhas[atual].first;
+    else if(linhas[anterior].first == linhas[atual].second || linhas[anterior].second == linhas[atual].second) return linhas[atual].second;
+    else return linhas[atual].first;
+}
+
+vector<vector<double>> addCaminho(vector <vector<double> > caminhos, int estacao_atual, int estacao_proxima, double custo){
+
+    if(caminhos[estacao_proxima][0] >  custo) {
+        caminhos[estacao_proxima].clear();
+        caminhos[estacao_proxima].emplace_back(custo);
+        for (int i = 1; i < caminhos[estacao_atual].size(); i++) {
+            int rota = caminhos[estacao_atual][i];
+            caminhos[estacao_proxima].emplace_back(rota);
+        }
+    }
+    caminhos[estacao_proxima].emplace_back(estacao_proxima);
+    return caminhos;
+}
+
+
 
 
 int main(){
 
-
+    vector <vector<double> > caminhos;
+    caminhos.resize(15);
     vector <bool> visit; visit.resize(15);
     vector <pair<double, int>> fronteira;
 
     int estacao_inicial, estacao_final;
-    cin >> estacao_inicial >> estacao_final;
+    cout << "Digite a estacao de origem -";
+    cin >> estacao_inicial;
+
+    cout << "Digite a estacao de destino -";
+    cin >> estacao_final;
+    cout << "####################################\n\n";
 
     //Inicializando o grafo com as distancias
     init_dist();
+    //Inicializando tabela com a cor das linhas de cada estação
+    init_linhas();
+    //Inicializando vetor com os caminhos
+    caminhos = init_caminhos(caminhos);
 
     //Transformando tudo que está em unidade de distancia (KM) para unidade de tempo (Min)
     convertToTime();
 
-
+    //Colocando a estacao_inicial da fronteira
     fronteira.emplace_back(0.0, estacao_inicial);
 
+    caminhos[estacao_inicial][0] = 0;
+    caminhos[estacao_inicial].emplace_back(estacao_inicial);
+
+    //Setando cor da linha da estacao atual
+    string linha_atual = linhas[estacao_inicial].first;
+
+    cout << "FRONTEIRA\n";
     while( (!fronteira.empty()) && (fronteira[0].second != estacao_final) ){
+
         int estacao_atual = fronteira[0].second;
         visit[estacao_atual] = true;
-        //capturando os vizinhos da estacao atual
+
+        //capturando os vizinhos da estacao atual e colocando-os na fronteira
         for(int i=1; i<15; i++){
             if(i == estacao_atual) continue;
-            double dreal = dist_real[estacao_inicial][estacao_atual];
-            double dreto = dist_estimada[i][estacao_final];
-            if (dreal < inf && !(visit[i])){
-                dist_real[estacao_inicial][i] = min(dist_real[estacao_inicial][i], dist_real[estacao_inicial][estacao_atual] + dreal);
-                dist_real[i][estacao_inicial] = min( dist_real[i][estacao_inicial], dist_real[estacao_inicial][estacao_atual] + dreal);
-                fronteira.emplace_back(heuristica(dreal, dreto), i);
+            double g = dist_real[estacao_inicial][estacao_atual] + dist_real[estacao_atual][i] ;
+            double h = dist_estimada[i][estacao_final];
+
+            //Caso exista as duas estacoes sejam vizinhas e não tenha sido visitado, adicione na fronteira
+            if (g < inf && !(visit[i])){
+                double tempo_baldeacao = baldeacao(linha_atual, i);
+                double custo_heuristica = heuristica(g, h, tempo_baldeacao);
+
+                dist_real[estacao_inicial][i] = min(dist_real[estacao_inicial][i] + tempo_baldeacao, g + tempo_baldeacao);
+                dist_real[i][estacao_inicial] = min(dist_real[i][estacao_inicial] + tempo_baldeacao, g + tempo_baldeacao);
+
+                fronteira.emplace_back( custo_heuristica, i);
+                caminhos = addCaminho(caminhos, estacao_atual, i, g+tempo_baldeacao);
+
             }
-
-
         }
 
-        cout << "Tempo em min:" << dist_real[estacao_inicial][estacao_atual] << " - Estação:" << estacao_atual << endl;
-
+        int estacao_anterior = fronteira[0].second;
         fronteira.erase(fronteira.begin());
+
+        //Ordenando de acordo com a heuristica (f)
         sort(fronteira.begin(), fronteira.end());
 
+        cout << estacao_anterior << "-> ";
+        for(int i=0; i < fronteira.size(); i++) cout << fronteira[i].second << "  ";
+        cout << "\n";
+
+        estacao_atual = fronteira[0].second;
+        linha_atual = trocaLinha(estacao_anterior, estacao_atual);
+
     }
+
+    
+    //Printando Saída
+    cout << "\n\n";
+    cout << "Tempo em Minutos: " << caminhos[estacao_final][0] << "\n";
+    cout << "Rota mais rapida ate " << "E" << estacao_final << ": ";
+    for(int i=1; i<caminhos[estacao_final].size(); i++){ cout << "E" << caminhos[estacao_final][i] << "  "; }
+    cout << "\n";
+
 
 
     return 0;
